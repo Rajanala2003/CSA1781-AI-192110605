@@ -1,0 +1,24 @@
+% Prolog program for Medical Diagnosis
+
+% Facts: symptoms of diseases
+symptom(flu, fever).
+symptom(flu, cough).
+symptom(flu, body_ache).
+symptom(cold, sneezing).
+symptom(cold, runny_nose).
+symptom(cold, sore_throat).
+symptom(covid, fever).
+symptom(covid, cough).
+symptom(covid, loss_of_taste).
+symptom(malaria, fever).
+symptom(malaria, chills).
+symptom(malaria, sweating).
+
+% Rule to diagnose disease based on symptoms
+diagnose(Disease, Symptoms) :-
+    findall(S, symptom(Disease, S), Symptoms).
+
+% Query Examples:
+% ?- diagnose(flu, Symptoms).
+% ?- diagnose(cold, Symptoms).
+% ?- diagnose(covid, Symptoms).

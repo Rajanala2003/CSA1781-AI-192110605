@@ -1,0 +1,25 @@
+% Prolog program for Backward Chaining
+
+% Facts: initial knowledge base
+fact(sunny).
+fact(warm).
+rule(go_outside :- sunny, warm).
+rule(stay_inside :- rainy).
+rule(wear_jacket :- cold).
+
+% Backward Chaining Inference
+prove(Goal) :- fact(Goal), write(Goal), write(' is a known fact.'), nl.
+prove(Goal) :- 
+    rule(Goal :- Condition1, Condition2),
+    prove(Condition1),
+    prove(Condition2),
+    write('Proved: '), write(Goal), nl.
+prove(Goal) :- 
+    rule(Goal :- Condition),
+    prove(Condition),
+    write('Proved: '), write(Goal), nl.
+
+% Query Examples:
+% ?- prove(go_outside).
+% ?- prove(stay_inside).
+% ?- prove(wear_jacket).

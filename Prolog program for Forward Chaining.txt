@@ -1,0 +1,28 @@
+% Prolog program for Forward Chaining
+
+% Facts: initial knowledge base
+fact(sunny).
+fact(warm).
+rule(if sunny and warm then go_outside).
+rule(if rainy then stay_inside).
+rule(if cold then wear_jacket).
+
+% Forward Chaining Inference
+infer(NewFact) :-
+    rule(if Condition then NewFact),
+    check_condition(Condition),
+    \+ fact(NewFact),
+    assertz(fact(NewFact)),
+    write('Inferred: '), write(NewFact), nl.
+
+% Check if conditions are met
+check_condition(A and B) :-
+    fact(A),
+    fact(B).
+check_condition(A) :-
+    fact(A).
+
+% Query Examples:
+% ?- infer(go_outside).
+% ?- infer(stay_inside).
+% ?- infer(wear_jacket).

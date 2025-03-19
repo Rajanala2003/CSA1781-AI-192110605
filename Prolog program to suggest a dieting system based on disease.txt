@@ -1,0 +1,16 @@
+% Prolog program to suggest a dieting system based on disease
+
+% Facts: diet(Disease, RecommendedFood).
+diet(diabetes, 'Low sugar, high fiber, lean protein, whole grains').
+diet(hypertension, 'Low sodium, high potassium, fruits, vegetables').
+diet(obesity, 'Low-calorie, high protein, fiber-rich foods').
+diet(anemia, 'Iron-rich foods like leafy greens, beans, red meat').
+diet(cardiac_disease, 'Heart-healthy foods like nuts, fish, whole grains').
+
+diet_recommendation(Disease, Food) :- diet(Disease, Food).
+
+% Queries:
+% ?- diet_recommendation(diabetes, Food).
+% ?- diet_recommendation(hypertension, Food).
+% ?- diet_recommendation(obesity, Food).
+% ?- diet_recommendation(anemia, Food).

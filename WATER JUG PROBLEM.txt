@@ -1,0 +1,53 @@
+from collections import deque
+
+def water_jug_bfs(capacity_x, capacity_y, target):
+    """Solve the Water Jug problem using BFS."""
+    visited = set()
+    queue = deque([(0, 0)])
+    
+    while queue:
+        x, y = queue.popleft()
+        
+        if (x, y) in visited:
+            continue
+        
+        visited.add((x, y))
+        print(f"({x}, {y})")
+        
+        if x == target or y == target:
+            return True
+        
+        possible_moves = set()
+        
+        # Fill Jug X
+        possible_moves.add((capacity_x, y))
+        # Fill Jug Y
+        possible_moves.add((x, capacity_y))
+        # Empty Jug X
+        possible_moves.add((0, y))
+        # Empty Jug Y
+        possible_moves.add((x, 0))
+        
+        # Pour water from X to Y
+        pour_x_to_y = min(x, capacity_y - y)
+        possible_moves.add((x - pour_x_to_y, y + pour_x_to_y))
+        
+        # Pour water from Y to X
+        pour_y_to_x = min(y, capacity_x - x)
+        possible_moves.add((x + pour_y_to_x, y - pour_y_to_x))
+        
+        for move in possible_moves:
+            if move not in visited:
+                queue.append(move)
+    
+    return False
+
+# Example Usage:
+capacity_x = 4
+capacity_y = 3
+target = 2
+
+if water_jug_bfs(capacity_x, capacity_y, target):
+    print(f"Target {target}L can be measured!")
+else:
+    print(f"Target {target}L cannot be measured!")

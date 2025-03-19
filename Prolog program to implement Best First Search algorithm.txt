@@ -1,0 +1,50 @@
+% Prolog program to implement Best First Search algorithm
+
+% Facts: graph representation with heuristic values
+edge(a, b, 4).
+edge(a, c, 3).
+edge(b, d, 5).
+edge(b, e, 12).
+edge(c, f, 8).
+edge(d, g, 7).
+edge(e, h, 2).
+edge(f, i, 6).
+edge(g, j, 10).
+edge(h, j, 5).
+edge(i, j, 3).
+
+heuristic(a, 7).
+heuristic(b, 6).
+heuristic(c, 5).
+heuristic(d, 4).
+heuristic(e, 3).
+heuristic(f, 4).
+heuristic(g, 2).
+heuristic(h, 1).
+heuristic(i, 2).
+heuristic(j, 0).
+
+% Best First Search Algorithm
+best_first_search(Start, Goal, Path) :-
+    best_first([[Start]], Goal, RevPath),
+    reverse(RevPath, Path).
+
+best_first([[Goal|Rest]|_], Goal, [Goal|Rest]).
+best_first([Path|Paths], Goal, FinalPath) :-
+    extend(Path, NewPaths),
+    append(Paths, NewPaths, UpdatedPaths),
+    sort_paths(UpdatedPaths, SortedPaths),
+    best_first(SortedPaths, Goal, FinalPath).
+
+extend([Node|Path], NewPaths) :-
+    findall([NewNode, Node|Path], (edge(Node, NewNode, _), \+ member(NewNode, [Node|Path])), NewPaths).
+
+sort_paths(Paths, SortedPaths) :-
+    map_list_to_pairs(path_heuristic, Paths, Pairs),
+    keysort(Pairs, SortedPairs),
+    pairs_values(SortedPairs, SortedPaths).
+
+path_heuristic([Node|_], H) :- heuristic(Node, H).
+
+% Query Example:
+% ?- best_first_search(a, j, Path).

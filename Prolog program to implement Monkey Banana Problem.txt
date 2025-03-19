@@ -1,0 +1,15 @@
+% Prolog program to implement Monkey Banana Problem
+
+% Facts: initial state of the monkey
+initial_state(monkey(room, on_floor, at_door, has_no_banana)).
+
+% Rules: defining actions
+move(monkey(room, on_floor, at_door, has_no_banana), climb_box, monkey(room, on_box, at_window, has_no_banana)).
+move(monkey(room, on_box, at_window, has_no_banana), grab_banana, monkey(room, on_box, at_window, has_banana)).
+
+% Goal state: Monkey has the banana
+can_get_banana(State) :- State = monkey(_, _, _, has_banana), write('Monkey got the banana!'), nl.
+can_get_banana(State) :- move(State, Action, NewState), write(Action), nl, can_get_banana(NewState).
+
+% Query Example:
+% ?- initial_state(State), can_get_banana(State).

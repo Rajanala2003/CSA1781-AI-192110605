@@ -1,0 +1,55 @@
+from collections import deque
+
+def is_valid(state):
+    """Check if the state is valid (no missionaries eaten)."""
+    M_left, C_left, M_right, C_right, _ = state
+    if (M_left > 0 and M_left < C_left) or (M_right > 0 and M_right < C_right):
+        return False
+    return True
+
+def get_next_states(state):
+    """Generate possible moves from the current state."""
+    M_left, C_left, M_right, C_right, boat = state
+    moves = [(1, 0), (2, 0), (0, 1), (0, 2), (1, 1)]
+    next_states = []
+    
+    for M, C in moves:
+        if boat == 1:  # Boat on left side
+            new_state = (M_left - M, C_left - C, M_right + M, C_right + C, 0)
+        else:  # Boat on right side
+            new_state = (M_left + M, C_left + C, M_right - M, C_right - C, 1)
+        
+        if min(new_state) >= 0 and is_valid(new_state):
+            next_states.append(new_state)
+    
+    return next_states
+
+def solve_missionaries_cannibals():
+    """Solve the Missionaries and Cannibals problem using BFS."""
+    initial_state = (3, 3, 0, 0, 1)
+    goal_state = (0, 0, 3, 3, 0)
+    queue = deque([(initial_state, [])])
+    visited = set()
+    
+    while queue:
+        current_state, path = queue.popleft()
+        
+        if current_state == goal_state:
+            return path + [current_state]
+        
+        if current_state in visited:
+            continue
+        
+        visited.add(current_state)
+        for next_state in get_next_states(current_state):
+            queue.append((next_state, path + [current_state]))
+    
+    return None
+
+# Example Usage:
+solution = solve_missionaries_cannibals()
+if solution:
+    for step in solution:
+        print(step)
+else:
+    print("No solution found.")

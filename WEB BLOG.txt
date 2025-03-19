@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Understanding HTML Tags in WordPress</title>
+</head>
+<body>
+    <h1>Welcome to My Blog</h1>
+    <p>This blog demonstrates the use of basic HTML tags in WordPress.</p>
+
+    <h2>Anchor Tag</h2>
+    <p>The anchor tag is used to create hyperlinks:</p>
+    <a href="https://www.wordpress.org" target="_blank">Visit WordPress</a>
+
+    <h2>Title Tag</h2>
+    <p>The `<title>` tag is used in the `<head>` section to define the page title.</p>
+
+    <h2>Other Tags</h2>
+    <p><strong>Bold text</strong> and <em>italic text</em> are created using `<strong>` and `<em>` tags.</p>
+</body>
+</html>

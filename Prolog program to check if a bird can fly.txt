@@ -1,0 +1,18 @@
+% Prolog program to check if a bird can fly
+
+% Facts: bird(Name, CanFly).
+bird(sparrow, yes).
+bird(penguin, no).
+bird(eagle, yes).
+bird(ostrich, no).
+bird(parrot, yes).
+
+% Rule to check if a bird can fly
+can_fly(Bird) :- bird(Bird, yes), write(Bird), write(' can fly.'), nl.
+cannot_fly(Bird) :- bird(Bird, no), write(Bird), write(' cannot fly.'), nl.
+
+% Queries:
+% ?- can_fly(sparrow).
+% ?- cannot_fly(penguin).
+% ?- can_fly(eagle).
+% ?- cannot_fly(ostrich).

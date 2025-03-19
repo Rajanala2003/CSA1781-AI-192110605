@@ -1,0 +1,29 @@
+from itertools import permutations
+
+def solve_cryptarithmetic(word1, word2, result):
+    """Solve a cryptarithmetic puzzle where word1 + word2 = result."""
+    unique_chars = set(word1 + word2 + result)
+    if len(unique_chars) > 10:
+        print("Too many unique characters, cannot be solved with digits 0-9.")
+        return
+    
+    char_list = list(unique_chars)
+    for perm in permutations(range(10), len(char_list)):
+        char_map = dict(zip(char_list, perm))
+        
+        if char_map[word1[0]] == 0 or char_map[word2[0]] == 0 or char_map[result[0]] == 0:
+            continue
+        
+        num1 = int("".join(str(char_map[c]) for c in word1))
+        num2 = int("".join(str(char_map[c]) for c in word2))
+        num_result = int("".join(str(char_map[c]) for c in result))
+        
+        if num1 + num2 == num_result:
+            print(f"Solution found: {char_map}")
+            print(f"{num1} + {num2} = {num_result}")
+            return
+    
+    print("No solution found.")
+
+# Example Usage:
+solve_cryptarithmetic("SEND", "MORE", "MONEY")

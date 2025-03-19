@@ -1,0 +1,10 @@
+% Prolog program to implement Towers of Hanoi
+
+% Move N disks from Source peg to Destination peg using Auxiliary peg
+tower_of_hanoi(0, _, _, _) :- !.
+tower_of_hanoi(N, Source, Destination, Auxiliary) :-
+    N > 0,
+    N1 is N - 1,
+    tower_of_hanoi(N1, Source, Auxiliary, Destination),
+    write('Move disk '), write(N), write(' from '), write(Source), write(' to '), write(Destination), nl,
+    tower_of_hanoi(N1, Auxiliary, Destination, Source).

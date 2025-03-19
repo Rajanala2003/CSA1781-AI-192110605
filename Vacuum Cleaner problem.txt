@@ -1,0 +1,24 @@
+import random
+
+def vacuum_cleaner(start, environment):
+    """Simulate a vacuum cleaner moving in a 2-room environment."""
+    score = 0
+    location = start
+    
+    for _ in range(10):  # Run for 10 steps
+        print(f"Vacuum at {location}, Environment: {environment}")
+        
+        if environment[location] == 'Dirty':
+            environment[location] = 'Clean'
+            score += 1
+            print("Cleaned!")
+        
+        location = 'A' if location == 'B' else 'B'
+    
+    print("Final Environment State:", environment)
+    print("Performance Score:", score)
+
+# Example Usage:
+environment = {'A': random.choice(['Clean', 'Dirty']), 'B': random.choice(['Clean', 'Dirty'])}
+vacuum_cleaner('A', environment)
+

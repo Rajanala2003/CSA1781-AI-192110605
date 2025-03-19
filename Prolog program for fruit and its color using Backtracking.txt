@@ -1,0 +1,17 @@
+% Prolog program for fruit and its color using Backtracking
+
+% Facts: fruit(Name, Color).
+fruit(apple, red).
+fruit(banana, yellow).
+fruit(grape, purple).
+fruit(orange, orange).
+fruit(kiwi, brown).
+fruit(lemon, yellow).
+
+% Rule to find fruit by color
+fruit_by_color(Color, Fruit) :- fruit(Fruit, Color).
+
+% Query Examples:
+% ?- fruit_by_color(yellow, Fruit).
+% ?- fruit_by_color(red, Fruit).
+% ?- fruit_by_color(purple, Fruit).

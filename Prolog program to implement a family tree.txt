@@ -1,0 +1,33 @@
+% Prolog program to implement a family tree
+
+% Facts: parent(Parent, Child).
+parent(john, mary).
+parent(john, david).
+parent(susan, mary).
+parent(susan, david).
+parent(mary, linda).
+parent(mary, james).
+parent(david, sarah).
+parent(david, tom).
+
+% Facts: male(Name) and female(Name).
+male(john).
+male(david).
+male(james).
+male(tom).
+female(susan).
+female(mary).
+female(linda).
+female(sarah).
+
+% Rules:
+father(F, C) :- parent(F, C), male(F).
+mother(M, C) :- parent(M, C), female(M).
+sibling(A, B) :- parent(P, A), parent(P, B), A \= B.
+grandparent(GP, C) :- parent(GP, P), parent(P, C).
+
+% Queries:
+% ?- father(john, mary).
+% ?- mother(susan, david).
+% ?- sibling(mary, david).
+% ?- grandparent(john, linda).

@@ -1,0 +1,10 @@
+% Prolog program for a database with Student, Teacher, and Subject Code
+
+% Facts: student_teacher_subject(Student, Teacher, SubjectCode).
+student_teacher_subject('Alice', 'Dr. Smith', 'CS101').
+student_teacher_subject('Bob', 'Dr. Johnson', 'MA202').
+student_teacher_subject('Charlie', 'Dr. Lee', 'PH303').
+student_teacher_subject('David', 'Dr. Brown', 'CS101').
+
+% Rule to find the teacher and subject code for a student
+teacher_subject(Student, Teacher, SubjectCode) :- student_teacher_subject(Student, Teacher, SubjectCode).

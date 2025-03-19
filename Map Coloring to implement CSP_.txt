@@ -1,0 +1,41 @@
+def is_valid_coloring(state, node, color, graph):
+    """Check if assigning 'color' to 'node' is valid."""
+    for neighbor in graph[node]:
+        if state.get(neighbor) == color:
+            return False
+    return True
+
+def backtrack(state, graph, colors):
+    """Backtracking algorithm for solving the map coloring problem."""
+    if len(state) == len(graph):
+        return state
+    
+    uncolored_nodes = [node for node in graph if node not in state]
+    node = uncolored_nodes[0]
+    
+    for color in colors:
+        if is_valid_coloring(state, node, color, graph):
+            state[node] = color
+            result = backtrack(state, graph, colors)
+            if result:
+                return result
+            state.pop(node)
+    
+    return None
+
+def map_coloring(graph, colors):
+    """Solve the map coloring problem using backtracking."""
+    return backtrack({}, graph, colors)
+
+# Example Usage:
+graph = {
+    'A': ['B', 'C', 'D'],
+    'B': ['A', 'C', 'E'],
+    'C': ['A', 'B', 'D', 'E'],
+    'D': ['A', 'C', 'E'],
+    'E': ['B', 'C', 'D']
+}
+
+colors = ['Red', 'Green', 'Blue']
+solution = map_coloring(graph, colors)
+print("Color Assignment:", solution)

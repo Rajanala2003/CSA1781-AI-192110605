@@ -1,0 +1,14 @@
+% Prolog program for a database of planets
+
+% Facts: planet(Name, Type, DistanceFromSun, Diameter, Moons).
+planet('Mercury', 'Terrestrial', 57.9, 4879, 0).
+planet('Venus', 'Terrestrial', 108.2, 12104, 0).
+planet('Earth', 'Terrestrial', 149.6, 12742, 1).
+planet('Mars', 'Terrestrial', 227.9, 6779, 2).
+planet('Jupiter', 'Gas Giant', 778.5, 139820, 79).
+planet('Saturn', 'Gas Giant', 1434, 116460, 83).
+planet('Uranus', 'Ice Giant', 2871, 50724, 27).
+planet('Neptune', 'Ice Giant', 4495, 49244, 14).
+
+% Rule to find planet details
+planet_info(Name, Type, DistanceFromSun, Diameter, Moons) :- planet(Name, Type, DistanceFromSun, Diameter, Moons).
